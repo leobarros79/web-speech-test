@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Speech Recognition</title>
+
+<h1>Google Web Speech Recognition Test</h1>
+<div id="status">
+</div>
+<p></p>
+<form action="http://google.com/search" method="get">
+  <input name="q" id="input_field" size="100">
+</form>
+<button onclick="reco.toggleStartStop()" style="border: 0; background-color:transparent">
+  <img id="status_img" src="mic.gif" alt="Start"></button>
+
+<script src="webspeech.js"></script>
+<script>
+var reco = new WebSpeechRecognition();
+reco.lang = "pt-BR";
+reco.statusText('status');
+reco.statusImage('status_img');
+reco.finalResults('input_field');
+
+reco.onEnd = function() {
+  if (reco.final_transcript != '') {
+    input_field.form.submit();
+  }
+};
+</script>
